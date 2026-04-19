@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gemini AI Chatbot - Chatbot pintar berbasis Google Gemini 2.5 Flash" />
+    <title>Gemini AI Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Animated Background Orbs -->
+      <div class="bg-orb bg-orb-1"></div>
+      <div class="bg-orb bg-orb-2"></div>
+      <div class="bg-orb bg-orb-3"></div>
+
+      <!-- Main Chat Container -->
+      <div class="chat-container" id="chatContainer">
+        <!-- Header -->
+        <header class="chat-header" id="chatHeader">
+          <div class="header-left">
+            <div class="bot-avatar" id="botAvatar">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-1v4a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-4H7a3 3 0 0 1-3-3v-1a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/>
+                <circle cx="9" cy="10" r="1.2" fill="currentColor"/>
+                <circle cx="15" cy="10" r="1.2" fill="currentColor"/>
+                <path d="M9.5 15a3.5 3.5 0 0 0 5 0"/>
+              </svg>
+            </div>
+            <div class="header-info">
+              <h1 id="headerTitle">Gemini AI Chatbot</h1>
+              <span class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                Online
+              </span>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="btn-icon" id="btnNewChat" title="Chat Baru" aria-label="Mulai chat baru">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </button>
+            <button class="btn-icon" id="btnThemeToggle" title="Ganti Tema" aria-label="Ganti tema">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-sun">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-moon">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <!-- Chat Messages Area -->
+        <main class="chat-messages" id="chatMessages">
+          <!-- Welcome Screen -->
+          <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-icon">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-1v4a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-4H7a3 3 0 0 1-3-3v-1a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/>
+                <circle cx="9" cy="10" r="1.2" fill="currentColor"/>
+                <circle cx="15" cy="10" r="1.2" fill="currentColor"/>
+                <path d="M9.5 15a3.5 3.5 0 0 0 5 0"/>
+              </svg>
+            </div>
+            <h2>Halo! Saya Gemini AI 👋</h2>
+            <p>Tanyakan apa saja kepada saya. Saya siap membantu!</p>
+            <div class="suggestion-chips" id="suggestionChips">
+              <button class="chip" data-message="Jelaskan apa itu Artificial Intelligence">
+                <span class="chip-icon">🤖</span>
+                Apa itu AI?
+              </button>
+              <button class="chip" data-message="Berikan tips belajar pemrograman untuk pemula">
+                <span class="chip-icon">💻</span>
+                Tips belajar coding
+              </button>
+              <button class="chip" data-message="Buatkan contoh kode JavaScript sederhana">
+                <span class="chip-icon">⚡</span>
+                Contoh kode JS
+              </button>
+              <button class="chip" data-message="Ceritakan fakta menarik tentang teknologi">
+                <span class="chip-icon">🚀</span>
+                Fakta teknologi
+              </button>
+            </div>
+          </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="chat-input-area" id="chatInputArea">
+          <div class="input-wrapper" id="inputWrapper">
+            <textarea
+              id="messageInput"
+              placeholder="Ketik pesan kamu..."
+              rows="1"
+              maxlength="4000"
+              aria-label="Tulis pesan"
+            ></textarea>
+            <button class="btn-send" id="btnSend" title="Kirim Pesan" aria-label="Kirim pesan" disabled>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+          <div class="input-footer">
+            <span class="char-count" id="charCount">0 / 4000</span>
+            <span class="powered-by">Powered by Gemini 2.5 Flash</span>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
